@@ -1,10 +1,25 @@
-import Movie from './Components/Movie';
+import Movie from './Components/Movie/Movie.style';
 import {movies} from './movieDummy';
+import styled, { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #22254b;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+`;
 
 
 function App() {
   return (
-    <div className="app-container">
+    <><GlobalStyle/>
+    <Container>
       {
         movies.results.map((item) => {
           return (
@@ -17,7 +32,8 @@ function App() {
           )
         })
       }
-    </div>
+      </Container>
+    </>
   );
 }
 
