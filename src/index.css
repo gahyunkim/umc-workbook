@@ -1,13 +1,73 @@
+@import 'reset.css';
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.root-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
 }
+
+.header-container {
+    background-color: rgba(3,37,65,1);
+}
+
+.header-wrap img{
+    max-width: 1400px;
+    margin-top: 5px;
+}
+
+.header-wrap {
+    width: 100%;
+    max-width: 1400px;
+    height: 64px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.header-left-wrap {
+    display: flex;
+}
+
+.header-left-wrap ul {
+    display: flex;
+    margin-left: 16px;
+}
+
+.header-left-wrap li {
+    padding: 8px;
+    margin-right: 14px;
+}
+
+.header-nav-item {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.login-container{
+    display: flex;
+}
+
+.login-wrap{
+    display: flex;
+    align-items: center;
+}
+
+.login-wrap p{
+    margin-left: 8px;
+    font-weight: 300;
+    color: white;
+}
+
+.login-wrap button{
+    padding: 4px;
+    width: 80px;
+    border-radius: 15px;
+    background-color: white;
+}
+
