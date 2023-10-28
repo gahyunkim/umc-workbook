@@ -5,7 +5,7 @@ class AdPage extends Component {
   constructor() {
     super();
     this.state = {
-      showAd: false, // 광고 표시 여부를 초기에 숨김으로 설정
+      showAd: true, // 광고 표시 여부를 초기에 보이도록 함
     };
   }
 

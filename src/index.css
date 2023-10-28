@@ -71,3 +71,71 @@ body {
     background-color: white;
 }
 
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-container {
+  position:relative;
+  width: 250px;
+  margin: 16px;
+  background-color: #373b69;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.movie-container img {
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.movie-info {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.movie-info h4 {
+  font-weight: 600;
+  margin: 0;
+}
+
+.movie-info span {
+  margin-left: 3px;
+}
+
+.movie-container:hover .movie-sub{
+  display:inline-block;
+}
+
+.movie-sub{
+  opacity: 0.8;
+  overflow:hidden;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  display: none;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.63);
+}
+
+.movie-sub h4{
+  font-weight: 600;
+  margin-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.movie-sub p{
+  margin-left: 10px;
+  line-height: 23px;
+}
+

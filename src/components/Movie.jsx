@@ -19,4 +19,3 @@ function Movie({title, vote_average, poster_path,overview}) {
   }
   
   export default Movie
-  // react에서 Component를 만든 후에 export를 해주어야 외부 파일에 사용할 수 있음
