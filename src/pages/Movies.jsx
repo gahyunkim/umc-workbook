@@ -1,7 +1,6 @@
 import React from 'react'
 import {movies} from '../movieDummy';
 import Movie from '../components/Movie';
-//const IMG_BASE_URL = "http://image.tmdb.org/t/p/w185/"
 
 export default function Movies() {
   return (
