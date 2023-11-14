@@ -115,6 +115,7 @@ body {
 }
 
 .movie-sub{
+  width: 100%;
   opacity: 0.8;
   overflow:hidden;
   border-radius: 5px;
@@ -128,6 +129,7 @@ body {
 }
 
 .movie-sub h4{
+  width: 100%;
   font-weight: 600;
   margin-left: 10px;
   padding-top: 20px;
