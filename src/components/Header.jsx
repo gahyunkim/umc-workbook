@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import Login from "./LoginControl";
+//import Login from "./LoginControl";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
+
+    // const onClickLogin = () => {
+    //     navigate("/login");
+    // };
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLoginClick = () => {
+        setIsLoggedIn(true);
+        navigate("/login");
+    };
+    
+    const handleLogoutClick = () => {
+        setIsLoggedIn(false);
+        navigate("/");
+    };
+
   return (
     <div className="header-container">
         <div className='header-wrap'>
@@ -30,8 +49,18 @@ export default function Header() {
                             인물
                         </Link>
                     </li>
-                </ul>
-                <Login/>
+                </ul>    
+                <div className='login-container'>
+                    {isLoggedIn ? (
+                    <div className='login-wrap'>
+                        <button onClick={handleLogoutClick}>로그아웃</button>
+                    </div>
+                ) : (
+                    <div className='login-wrap'>
+                        <button onClick={handleLoginClick}>로그인</button>
+                    </div>
+                    )}
+                </div>       
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import Movies from "./pages/Movies";
 import TV from "./pages/TV";
 import NotFound from "./pages/NotFound";
 import MovieDetail from "./pages/MovieDetail";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/tv" element={<TV/>} />
           <Route path="/person" element={<Celebrity/>} />
           <Route path="/*" element={<NotFound/>} />
+          <Route path="/login" element={<LoginPage/>} />
         </Routes>
       </BrowserRouter>
     </div>
