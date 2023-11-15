@@ -1,6 +1,8 @@
 import React from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import {IMG_BASE_URL} from '../components/Movie'
+
+const IMG_BASE_URL = "http://image.tmdb.org/t/p/w185/"
+
 
 export default function MovieDetail() {
   const {title} = useParams();

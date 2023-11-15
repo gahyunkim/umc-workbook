@@ -17,10 +17,10 @@ export default function Header() {
         navigate("/login");
     };
     
-    const handleLogoutClick = () => {
-        setIsLoggedIn(false);
-        navigate("/");
-    };
+    // const handleLogoutClick = () => {
+    //     setIsLoggedIn(false);
+    //     navigate("/");
+    // };
 
   return (
     <div className="header-container">
@@ -50,17 +50,9 @@ export default function Header() {
                         </Link>
                     </li>
                 </ul>    
-                <div className='login-container'>
-                    {isLoggedIn ? (
-                    <div className='login-wrap'>
-                        <button onClick={handleLogoutClick}>로그아웃</button>
-                    </div>
-                ) : (
-                    <div className='login-wrap'>
-                        <button onClick={handleLoginClick}>로그인</button>
-                    </div>
-                    )}
-                </div>       
+                <div className='login-wrap'>
+                    <button onClick={handleLoginClick}>로그인</button>
+                </div>   
             </div>
         </div>
     </div>

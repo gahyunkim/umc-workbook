@@ -1,42 +1,101 @@
 import React, { useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import {
+  updateUsername,
+  updatePassword,
+  startLoading,
+  stopLoading,
+  loginSuccess,
+  loginFailure,
+} from '../redux/action';
+
 export default function LoginPage() {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
+
   const [useremail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isEmailValid, setEmailValid] = useState("");
-  const [isPasswordValid, setPasswordValid] = useState("");
+
+  const [isEmailValid, setEmailValid] = useState(true);
+  const [isPasswordValid, setPasswordValid] = useState(true);
   const [buttonActivated, setButtonActivated] = useState(false);
   
+  //const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
+  //const passwordRegEx = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/
 
-  const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/i;
-  const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
+  const getErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case 400:
+        return 'body 값이 비어 있습니다.';
+      case 401:
+        return '존재하지 않는 ID입니다.';
+      case 402:
+        return '비밀번호가 틀렸습니다.';
+      default:
+        return '알 수 없는 오류가 발생했습니다.';
+    }
+  };
+
 
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setUserEmail(emailValue);
     
-    const isValid = emailRegEx.test(emailValue);
-    setEmailValid(isValid);
+    //const isValid = emailRegEx.test(emailValue);
+    //setEmailValid(isValid);
   }
 
   const handlePasswordChange = (e) => {
     const passwordValue = e.target.value;
     setPassword(passwordValue);
 
-    const isValid = passwordRegEx.test(passwordValue);
-    setPasswordValid(isValid);
+    //const isValid = passwordRegEx.test(passwordValue);
+    //setPasswordValid(isValid);
   }
 
-  const handleButtonClick = () => {
-    if (isEmailValid && isPasswordValid) {
-      setButtonActivated(true);
-      console.log("로그인이 완료되었습니다")
+  const handleButtonClick = async (event) => {
+    // eslint-disable-next-line no-mixed-operators
+    // isEmailValid && isPasswordValid || useremail !== ""|| password !== ""
+    if (useremail !== ""&& password !== "") {
+      //setButtonActivated(true);
+      dispatch(startLoading());
 
+      try {
+        const response = await axios.post('3000/user/login', {
+          id: useremail,
+          pw: password,
+        });
+
+        if (response.data.code === 200) {
+          dispatch(loginSuccess(response.data.userInfo));
+          console.log("로그인이 완료되었습니다");
+        } else {
+          dispatch(loginFailure(response.data.code));
+          alert('로그인 실패: ' + getErrorMessage(response.data.code));
+        }
+      } catch (error) {
+        dispatch(loginFailure(500));
+        alert('서버 오류가 발생했습니다.');
+      } finally {
+        
+        setTimeout(() => {
+          setButtonActivated(false);
+          dispatch(stopLoading());
+        }, 1500); // Wait for 1.5 seconds
+      }
     } else {
-      setEmailValid(!isEmailValid);
-      setPasswordValid(!isPasswordValid);
+      //setEmailValid(!isEmailValid);
+      //setPasswordValid(!isPasswordValid);
 
-      setButtonActivated(false);
+      //setButtonActivated(false);
+
+      // 빈 값이 있다면 alert를 사용하여 사용자에게 메시지 표시
+      alert('이메일과 비밀번호를 모두 입력하세요.');
+      
+      // submit 이벤트의 기본 동작을 중단
+      event.preventDefault();
     }
   }
 
@@ -61,9 +120,17 @@ export default function LoginPage() {
         {!isPasswordValid && <p id='pass_check'>올바른 비밀번호를 입력해주세요.</p>}
       </div>
       <div className={`login-check-btn`}>
-        <button id='logbtn_check'onClick={handleButtonClick} style={buttonStyle} disabled={!isEmailValid || !isPasswordValid}>
-        확인
+        <button
+          id='logbtn_check'
+          onClick={(event) => handleButtonClick(event)}
+          style={buttonStyle}
+          disabled={!isEmailValid || !isPasswordValid || buttonActivated}
+        >
+          확인
         </button>
+      </div>
+      <div className='axios_load'>
+        <p>{loading ? '로딩 중...' : '로딩 전'}</p>
       </div>
     </div>
   )
