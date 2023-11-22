@@ -1,7 +1,7 @@
 // reducer.js
 const initialState = {
-    username: 'umcweb',
-    password: '1234',
+    username: '',
+    password: '',
     loading: false,
     errorCode: null,
     userInfo: null,

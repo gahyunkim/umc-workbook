@@ -14,6 +14,7 @@ import {
 export default function LoginPage() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
+  const url = '//localhost:8000/user/login';
 
   const [useremail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +43,7 @@ export default function LoginPage() {
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setUserEmail(emailValue);
+    dispatch(updateUsername(emailValue)); // Redux 상태 업데이트
     
     //const isValid = emailRegEx.test(emailValue);
     //setEmailValid(isValid);
@@ -50,6 +52,7 @@ export default function LoginPage() {
   const handlePasswordChange = (e) => {
     const passwordValue = e.target.value;
     setPassword(passwordValue);
+    dispatch(updatePassword(passwordValue)); 
 
     //const isValid = passwordRegEx.test(passwordValue);
     //setPasswordValid(isValid);
@@ -63,20 +66,23 @@ export default function LoginPage() {
       dispatch(startLoading());
 
       try {
-        const response = await axios.post('3000/user/login', {
+        const response = await axios.post(url, {
           id: useremail,
           pw: password,
         });
 
-        if (response.data.code === 200) {
+        if (response.data.code === 200 || 2000) {
           dispatch(loginSuccess(response.data.userInfo));
           console.log("로그인이 완료되었습니다");
+          console.log(response);
         } else {
           dispatch(loginFailure(response.data.code));
           alert('로그인 실패: ' + getErrorMessage(response.data.code));
+          console.log(response);
         }
       } catch (error) {
         dispatch(loginFailure(500));
+        console.log(error.response);
         alert('서버 오류가 발생했습니다.');
       } finally {
         
