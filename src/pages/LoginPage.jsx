@@ -71,10 +71,21 @@ export default function LoginPage() {
           pw: password,
         });
 
-        if (response.data.code === 200 || 2000) {
+        if (response.data.code === 2000) {
           dispatch(loginSuccess(response.data.userInfo));
           console.log("로그인이 완료되었습니다");
           console.log(response);
+
+          // 로그인 후에 토큰과 id 받아오고, 이를 local Storage에 저장하기
+          const accessToken = response.data.result.AccessToken;
+          const id = response.data.result.userId;
+          //console.log(accessToken, id);
+
+          localStorage.setItem('token', accessToken);
+          localStorage.setItem('id', id);
+
+          console.log('Token and id stored in local storage:', accessToken, id);
+
         } else {
           dispatch(loginFailure(response.data.code));
           alert('로그인 실패: ' + getErrorMessage(response.data.code));
@@ -82,7 +93,7 @@ export default function LoginPage() {
         }
       } catch (error) {
         dispatch(loginFailure(500));
-        console.log(error.response);
+        console.log(error);
         alert('서버 오류가 발생했습니다.');
       } finally {
         
