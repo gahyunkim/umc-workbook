@@ -111,7 +111,7 @@ export default function LoginPage() {
       // 빈 값이 있다면 alert를 사용하여 사용자에게 메시지 표시
       alert('이메일과 비밀번호를 모두 입력하세요.');
       
-      // submit 이벤트의 기본 동작을 중단sssss
+      // submit 이벤트의 기본 동작을 중단
       event.preventDefault();
     }
   }
