@@ -100,7 +100,7 @@ export default function LoginPage() {
         setTimeout(() => {
           setButtonActivated(false);
           dispatch(stopLoading());
-        }, 1500); // Wait for 1.5 seconds
+        }, 1500); // Wait for 1.5 secondss
       }
     } else {
       //setEmailValid(!isEmailValid);
